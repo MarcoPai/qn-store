@@ -164,6 +164,16 @@ class QiniuStore extends StorageBase {
       if (keyOptions.prefix) {
         prefix = moment().format(getValue(keyOptions.prefix))
           .replace(/^\//, '');
+        /* Added support for Custom storage path
+         * update: 2019/6/17 by MarcoPai
+         * example:
+         *    folder: "xxx/xxx/"
+         *    prefix: "YYYY/MM"
+         *    xxx/xxx/2019/06/
+         */
+        if (keyOptions.folder) {
+          prefix = keyOptions.folder + prefix;
+        }
       }
 
       if (keyOptions.suffix) {
